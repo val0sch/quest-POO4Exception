@@ -52,7 +52,6 @@ echo '<br> Volume of the truck: ' . $nickTruck->getVolume() . " " . 'tonnes';
 echo '<br> Loading of the truck : ' . $nickTruck->getLoading() . '<br>';
 
 
-
 $motorway = new MotorWay(4, 130);
 var_dump($motorway);
 $pedestrianWay = new PedestrianWay(1, 10);
@@ -60,4 +59,17 @@ $residentialWay = new ResidentialWay(2, 50);
 
 var_dump($nickTruck instanceof MotorWay);
 
-var_dump($motorway->addVehicle("bike"));
+$motorway->addVehicle("bike");
+$motorway->addVehicle("moto");
+$motorway->addVehicle("skateboard");
+var_dump($motorway->getCurrentVehicles());
+
+$pedestrianWay->addVehicle("bike");
+$pedestrianWay->addVehicle("moto");
+$pedestrianWay->addVehicle("skateboard");
+var_dump($pedestrianWay->getCurrentVehicles());
+
+$residentialWay->addVehicle("bike");
+$residentialWay->addVehicle("moto");
+$residentialWay->addVehicle("skateboard");
+var_dump($residentialWay->getCurrentVehicles());
