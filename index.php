@@ -5,7 +5,7 @@ require_once 'Car.php';
 require_once 'Truck.php';
 require_once 'MotorWay.php';
 require_once 'PedestrianWay.php';
-require_once 'ResidentialWay.php';
+require_once 'Vehicle.php';
 
 
 // *** Moving bike ***
@@ -52,24 +52,32 @@ echo '<br> Volume of the truck: ' . $nickTruck->getVolume() . " " . 'tonnes';
 echo '<br> Loading of the truck : ' . $nickTruck->getLoading() . '<br>';
 
 
-$motorway = new MotorWay(4, 130);
-var_dump($motorway);
-$pedestrianWay = new PedestrianWay(1, 10);
-$residentialWay = new ResidentialWay(2, 50);
+// ***************** correction
 
-var_dump($nickTruck instanceof MotorWay);
+$truckOne = new Truck('black', 3, 90);
+$alfaromeo = new Car('red', 5, 180);
+$seatCupra = new Car('green', 4, 400);
+$bike = new Bicycle('blue', 12);
+$motorWay = new MotorWay();
+$pedestrianWay = new PedestrianWay();
 
-$motorway->addVehicle("bike");
-$motorway->addVehicle("moto");
-$motorway->addVehicle("skateboard");
-var_dump($motorway->getCurrentVehicles());
+echo 'MotorWay : ' . PHP_EOL;
+echo $motorWay->addVehicle($alfaromeo) . PHP_EOL;
+echo $motorWay->addVehicle($seatCupra) . PHP_EOL;
+echo $motorWay->addVehicle($bike) . PHP_EOL;
 
-$pedestrianWay->addVehicle("bike");
-$pedestrianWay->addVehicle("moto");
-$pedestrianWay->addVehicle("skateboard");
-var_dump($pedestrianWay->getCurrentVehicles());
 
-$residentialWay->addVehicle("bike");
-$residentialWay->addVehicle("moto");
-$residentialWay->addVehicle("skateboard");
-var_dump($residentialWay->getCurrentVehicles());
+echo 'PedestrianWay : ';
+echo $pedestrianWay->addVehicle($bike) . PHP_EOL;
+
+
+// ************* Exception Try Catch  quest4***********
+$carToto = new Car('red', 5, 180);
+
+try {
+    $carToto->start();
+} catch (Exception $e) {
+    echo 'Exception received  : ' . $e->getMessage() . PHP_EOL;
+} finally {
+    echo 'Ma voiture roule comme un donut ' . PHP_EOL;
+}

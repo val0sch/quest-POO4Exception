@@ -9,11 +9,10 @@ class Car extends Vehicle
         'fuel',
         'electric',
     ];
+    protected string $energy;
+    protected int $energyLevel;
+    protected bool $hasParkBrake = true;
 
-
-    private string $energy;
-
-    private int $energyLevel;
 
     public function __construct(string $color, int $nbSeats, string $energy)
     {
@@ -21,14 +20,28 @@ class Car extends Vehicle
         $this->energy = $energy;
     }
 
+    public function start(): string
+    {
+        if ($this->hasParkBrake === true) {
+            throw new Exception("Enlève le frein à main !!");
+        } else {
+            $this->currentSpeed = 15;
+            return "Go !";
+        }
+    }
+
+
     public function getEnergy(): string
     {
         return $this->energy;
     }
 
-    public function setEnergy(string $energy): void
+    public function setEnergy(string $energy): Car
     {
-        $this->energy = $energy;
+        if (in_array($energy, self::ALLOWED_ENERGIES)) {
+            $this->energy = $energy;
+        }
+        return $this;
     }
 
     public function getEnergyLevel(): int
@@ -39,5 +52,21 @@ class Car extends Vehicle
     public function setEnergyLevel(int $energyLevel): void
     {
         $this->energyLevel = $energyLevel;
+    }
+
+    /**
+     * Get the value of hasParkBrake
+     */
+    public function getParkBrake()
+    {
+        return $this->hasParkBrake;
+    }
+
+    /**
+     * Set the value of hasParkBrake
+     */
+    public function setParkBrake($hasParkBrake)
+    {
+        $this->hasParkBrake = $hasParkBrake;
     }
 }
